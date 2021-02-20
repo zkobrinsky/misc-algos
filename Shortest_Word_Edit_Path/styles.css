@@ -1,0 +1,34 @@
+body {
+    background: #fff;
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+}
+body {
+    background-color: #fcfcfc;
+    font-family: 'Open Sans',sans-serif;
+    line-height: 1.4em;
+    min-height: 100%;
+    font-size: 1em;
+    margin: 0;
+    height: 100%;
+    color: #131c26;
+}
+
+.nav-tab-panel_active {
+    display: block;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.nav-tab-panel {
+    background: #fff;
+    color: #000;
+    flex: 1 1 auto;
+    font-family: serif;
+    font-size: 18px;
+    line-height: 1.5;
+    padding: 15px;
+}
+* {
+    box-sizing: border-box;
+}

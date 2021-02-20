@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <div class="nav-tab-panel nav-tab-panel_active nav-tab-panel_markdown"><h2>Shortest Word Edit Path</h2>
+        <h4>(from pramp.com interview prep)</h4>
+        <p>Given two words <code>source</code> and <code>target</code>, and a list of words <code>words</code>, find the length of the shortest series of edits that transforms <code>source</code> to <code>target</code>.</p>
+        <p>Each edit must change exactly one letter at a time, and each intermediate word (and the final <code>target</code> word) must exist in <code>words</code>.</p>
+        <p>If the task is impossible, return <code>-1</code>.</p>
+        <p><strong>Examples:</strong></p>
+        <pre><code class="hljs javascript">source = <span class="hljs-string">"bit"</span>, target = <span class="hljs-string">"dog"</span>
+        words = [<span class="hljs-string">"but"</span>, <span class="hljs-string">"put"</span>, <span class="hljs-string">"big"</span>, <span class="hljs-string">"pot"</span>, <span class="hljs-string">"pog"</span>, <span class="hljs-string">"dog"</span>, <span class="hljs-string">"lot"</span>]
+        
+        output: <span class="hljs-number">5</span>
+        explanation: bit -&gt; but -&gt; put -&gt; pot -&gt; pog -&gt; dog has <span class="hljs-number">5</span> transitions.
+        </code></pre>
+        <pre><code class="hljs pramp">source = <span class="hljs-string">"no"</span>, target = <span class="hljs-string">"go"</span>
+        words = [<span class="hljs-string">"to"</span>]
+        
+        output: <span class="hljs-number">-1</span>
+        </code></pre>
+        <p><strong>Constraints:</strong></p>
+        <ul>
+        <li><strong>[time limit] 5000ms</strong></li>
+        <li><strong>[input] string</strong> <code>source</code>
+        <ul>
+        <li>1 ≤ source.length ≤ 20</li>
+        </ul>
+        </li>
+        <li><strong>[input] string</strong> <code>target</code>
+        <ul>
+        <li>1 ≤ target.length ≤ 20</li>
+        </ul>
+        </li>
+        <li><strong>[input] array.string</strong> <code>words</code>
+        <ul>
+        <li>1 ≤ words.length ≤ 20</li>
+        </ul>
+        </li>
+        <li><strong>[output] array.integer</strong></li>
+        </ul>
+        </div>
+
+</body>
+</html>

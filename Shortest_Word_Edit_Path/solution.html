@@ -1,0 +1,50 @@
+<div class="nav-tab-panel nav-tab-panel_active nav-tab-panel_markdown"><h2>Shortest Word Edit Path</h2>
+    <p><strong>Solution: Breadth First Search</strong></p>
+    <p>Finding a shortest path is typically done with a breadth first search.  Here, we have some underlying graph of words, and two words are connected (neighbors) if they differ by exactly one letter (and have the same length).</p>
+    <p>The breadth first search explores all nodes distance 0 from the source, then all nodes distance 1, then all nodes distance 2, and so on.  This ensure that if we find the target word, we found it at the least possible distance and thus the answer is correct.</p>
+    <p>One difficulty in this question is, given a <code>word</code>, what are all neighboring words? (Words that differ by exactly one letter.)</p>
+    <p>There are two strategies to enumerating these neighbors:</p>
+    <ul>
+    <li>
+    <p>One strategy is, for every <code>word2</code> in the given <code>words</code>, check that <code>word</code> and <code>word2</code> differ by 1.</p>
+    </li>
+    <li>
+    <p>Another strategy is, for every index <code>i</code> from <code>0 .. word.length - 1</code> and for every lowercase letter <code>c</code>, clone <code>word</code> into <code>word2</code>, replace <code>word2[i]</code> with <code>c</code>, and check whether the resulting <code>word2</code> is in <code>words</code>.</p>
+    </li>
+    </ul>
+    <p>The decision to use one strategy or another depends on the input parameters.  Here, we showcase the second strategy, with the first in the comments.</p>
+    <pre><code class="language-pramp hljs"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">shortestWordEditPath</span><span class="hljs-params">(source, target, words)</span>:</span>
+        alphabet = <span class="hljs-string">'abcdefghijklmnopqrstuvwxyz'</span>
+        wordset = <span class="hljs-keyword">new</span> HashSet(words)
+        queue = Queue()
+        queue.add((source, <span class="hljs-number">0</span>))
+        seen = <span class="hljs-keyword">new</span> HashSet([source])
+    
+        <span class="hljs-keyword">while</span> queue:
+            word, depth = queue.popfront()
+            <span class="hljs-keyword">if</span> word == target: <span class="hljs-keyword">return</span> depth
+            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">from</span> <span class="hljs-number">0</span> to word.<span class="hljs-keyword">length</span>:
+                <span class="hljs-comment"># First Strategy:</span>
+                <span class="hljs-comment"># for word2 in words:</span>
+                <span class="hljs-comment">#     if word2.length == word.length:</span>
+                <span class="hljs-comment">#         diff = 0</span>
+                <span class="hljs-comment">#         for j from 0 to word.length:</span>
+                <span class="hljs-comment">#             if word[j] != word2[j]:</span>
+                <span class="hljs-comment">#                 diff += 1</span>
+                <span class="hljs-comment">#                 if diff == 2: break</span>
+                <span class="hljs-comment">#         if diff == 1 and word2 not in seen:</span>
+                <span class="hljs-comment">#             queue.append((word2, depth+1))</span>
+                <span class="hljs-comment">#             seen.add(word2)</span>
+    
+                <span class="hljs-comment"># Second Strategy:</span>
+                <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> alphabet:
+                    word2 = word.clone()
+                    word2[i] = c
+                    <span class="hljs-keyword">if</span> word2 <span class="hljs-keyword">in</span> wordset <span class="hljs-keyword">and</span> word2 <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> seen:
+                        queue.append((word2, depth+<span class="hljs-number">1</span>))
+                        seen.add(word2)
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>
+    </code></pre>
+    <p><strong>Time Complexity:</strong> <code>O(N*K^2)</code> , where <code>N</code> is the length of <code>words</code> and <code>K</code> is the maximum length of any given word.  For each word in <code>words</code>, in order to find neighbors we may construct <code>O(K)</code> new words, each in <code>O(K)</code> time.</p>
+    <p><strong>Space Complexity:</strong> <code>O(NK)</code>, the space to store the word list.</p>
+    </div>
