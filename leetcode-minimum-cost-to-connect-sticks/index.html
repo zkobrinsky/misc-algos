@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="question-wrapper">
+      <div class="content-title small-content-title">
+        <div class="question-title">
+          <span
+            ><i
+              title="Coding Question"
+              class="fa fa-file-code-o content-icon"
+              aria-hidden="true"
+            ></i>
+            &nbsp;</span
+          >Minimum Cost to Connect Sticks
+        </div>
+      </div>
+      <div class="question-area">
+        <div class="question-detail">
+          <div class="question-description__3U1T">
+            <div>
+              <p>
+                You have some number of sticks with positive integer lengths.
+                These lengths are given as an array&nbsp;<code>sticks</code>,
+                where&nbsp;<code>sticks[i]</code>&nbsp;is the length of
+                the&nbsp;<code>i<sup>th</sup></code
+                >&nbsp;stick.
+              </p>
+
+              <p>
+                You can connect any two sticks of lengths <code>x</code> and
+                <code>y</code> into one stick&nbsp;by paying a cost of
+                <code>x + y</code>. You must connect&nbsp;all the sticks until
+                there is only one stick remaining.
+              </p>
+
+              <p>
+                Return&nbsp;<em
+                  >the minimum cost of connecting all the given sticks into one
+                  stick in this way</em
+                >.
+              </p>
+
+              <p>&nbsp;</p>
+              <p><strong>Example 1:</strong></p>
+
+              <pre><strong>Input:</strong> sticks = [2,4,3]
+        <strong>Output:</strong> 14
+        <strong>Explanation:</strong>&nbsp;You start with sticks = [2,4,3].
+        1. Combine sticks 2 and 3 for a cost of 2 + 3 = 5. Now you have sticks = [5,4].
+        2. Combine sticks 5 and 4 for a cost of 5 + 4 = 9. Now you have sticks = [9].
+        There is only one stick left, so you are done. The total cost is 5 + 9 = 14.
+        </pre>
+
+              <p><strong>Example 2:</strong></p>
+
+              <pre><strong>Input:</strong> sticks = [1,8,3,5]
+        <strong>Output:</strong> 30
+        <strong>Explanation:</strong> You start with sticks = [1,8,3,5].
+        1. Combine sticks 1 and 3 for a cost of 1 + 3 = 4. Now you have sticks = [4,8,5].
+        2. Combine sticks 4 and 5 for a cost of 4 + 5 = 9. Now you have sticks = [9,8].
+        3. Combine sticks 9 and 8 for a cost of 9 + 8 = 17. Now you have sticks = [17].
+        There is only one stick left, so you are done. The total cost is 4 + 9 + 17 = 30.
+        </pre>
+
+              <p><strong>Example 3:</strong></p>
+
+              <pre><strong>Input:</strong> sticks = [5]
+        <strong>Output:</strong> 0
+        <strong>Explanation:</strong> There is only one stick, so you don't need to do anything. The total cost is 0.
+        </pre>
+
+              <p>&nbsp;</p>
+              <p><strong>Constraints:</strong></p>
+
+              <ul>
+                <li>
+                  <code
+                    ><span
+                      >1 &lt;= sticks.length &lt;= 10<sup>4</sup></span
+                    ></code
+                  >
+                </li>
+                <li>
+                  <code
+                    ><span>1 &lt;= sticks[i] &lt;= 10<sup>4</sup></span></code
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hints-area">
+        <div class="css-haw22i">
+          <div
+            class="expandable-panel__YLuE"
+            style="background-color: white; margin-top: 0px"
+          >
+            <div class="center__3_51">
+              <div class="expand-btn__2cag">
+                <span class="text">&nbsp;</span
+                ><i class="fa fa-lightbulb-o" aria-hidden="true"></i
+                ><span class="text">&nbsp;&nbsp;</span>Show Hint
+                #1&nbsp;&nbsp;<i
+                  class="fa fa-caret-down"
+                  aria-hidden="true"
+                ></i>
+              </div>
+            </div>
+            <div class="expandable-wrapper__37QK">
+              <div>
+                <div class="line__2vww"></div>
+                <div class="content__1q_0">
+                  <div>
+                    How many times does every stick contribute to the answer?
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="css-haw22i">
+          <div
+            class="expandable-panel__YLuE"
+            style="background-color: white; margin-top: 0px"
+          >
+            <div class="center__3_51">
+              <div class="expand-btn__2cag">
+                <span class="text">&nbsp;</span
+                ><i class="fa fa-lightbulb-o" aria-hidden="true"></i
+                ><span class="text">&nbsp;&nbsp;</span>Show Hint
+                #2&nbsp;&nbsp;<i
+                  class="fa fa-caret-down"
+                  aria-hidden="true"
+                ></i>
+              </div>
+            </div>
+            <div class="expandable-wrapper__37QK">
+              <div>
+                <div class="line__2vww"></div>
+                <div class="content__1q_0">
+                  <div>
+                    Some of the sticks will be used more than the others. Which
+                    sticks should be used the most/least?
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="css-haw22i">
+          <div
+            class="expandable-panel__YLuE"
+            style="background-color: white; margin-top: 0px"
+          >
+            <div class="center__3_51">
+              <div class="expand-btn__2cag">
+                <span class="text">&nbsp;</span
+                ><i class="fa fa-lightbulb-o" aria-hidden="true"></i
+                ><span class="text">&nbsp;&nbsp;</span>Show Hint
+                #3&nbsp;&nbsp;<i
+                  class="fa fa-caret-down"
+                  aria-hidden="true"
+                ></i>
+              </div>
+            </div>
+            <div class="expandable-wrapper__37QK">
+              <div>
+                <div class="line__2vww"></div>
+                <div class="content__1q_0">
+                  <div>
+                    The sticks with long lengths cost a lot so we should use
+                    these the least.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="css-haw22i">
+          <div
+            class="expandable-panel__YLuE"
+            style="background-color: white; margin-top: 0px"
+          >
+            <div class="center__3_51">
+              <div class="expand-btn__2cag">
+                <span class="text">&nbsp;</span
+                ><i class="fa fa-lightbulb-o" aria-hidden="true"></i
+                ><span class="text">&nbsp;&nbsp;</span>Show Hint
+                #4&nbsp;&nbsp;<i
+                  class="fa fa-caret-down"
+                  aria-hidden="true"
+                ></i>
+              </div>
+            </div>
+            <div class="expandable-wrapper__37QK">
+              <div>
+                <div class="line__2vww"></div>
+                <div class="content__1q_0">
+                  <div>What if we keep merging the two shortest sticks?</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="editor-area">
+        <div tabindex="-1" style="outline: 0px">
+          <div class="question-detail-bottom">
+            <div class="editor-base">
+              <hr class="line solid" />
+              <div class="row control-btn-bar">
+                <div class="col-md-12">
+                  <div class="language-select-wrapper pull-left select-wrapper">
+                    <div class="Select has-value Select--single">
+                      <input
+                        name="lang-select"
+                        type="hidden"
+                        value="javascript"
+                      />
+                      <div class="Select-control">
+                        <span
+                          class="Select-multi-value-wrapper"
+                          id="react-select-3--value"
+                          ><div class="Select-value">
+                            <span
+                              class="Select-value-label"
+                              role="option"
+                              aria-selected="true"
+                              id="react-select-3--value-item"
+                              >JavaScript</span
+                            >
+                          </div>
+                          <div
+                            aria-expanded="false"
+                            aria-owns=""
+                            aria-activedescendant="react-select-3--value"
+                            aria-disabled="false"
+                            class="Select-input"
+                            role="combobox"
+                            tabindex="0"
+                            style="
+                              border: 0px;
+                              width: 1px;
+                              display: inline-block;
+                            "
+                          ></div></span
+                        ><span class="Select-arrow-zone"
+                          ><span class="Select-arrow"></span
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="hidden-xs learn-more-wrapper"
+                    ><span data-toggle="modal"
+                      ><span
+                        class=""
+                        data-toggle="popover"
+                        data-trigger="hover"
+                        data-placement="top"
+                        data-content="Learn more about our JavaScript environment"
+                        data-container="body"
+                        aria-hidden="true"
+                        style="cursor: pointer"
+                        data-original-title=""
+                        title=""
+                        ><span
+                          class="learn-more-btn fa fa-question-circle"
+                        ></span></span></span></span
+                  ><span class="pull-right editor-toolbar"
+                    ><span class="hidden-xs"></span
+                    ><span
+                      class="editor-popover"
+                      data-toggle="popover"
+                      data-trigger="hover"
+                      data-placement="top"
+                      data-content="Retrieve last submitted code"
+                      data-container=""
+                      aria-hidden="true"
+                      style="cursor: pointer"
+                      data-original-title=""
+                      title=""
+                      ><button class="editor-btn code-btn btn btn-default">
+                        <i class="fa fa-file-code-o"></i></button></span
+                    ><span
+                      class="editor-popover"
+                      data-toggle="popover"
+                      data-trigger="hover"
+                      data-placement="top"
+                      data-content="Reset to default code definition"
+                      data-container=""
+                      aria-hidden="true"
+                      style="cursor: pointer"
+                      data-original-title=""
+                      title=""
+                      ><button class="editor-btn reset-btn btn btn-default">
+                        <i class="fa fa-refresh"></i></button
+                    ></span>
+                    <div>
+                      <span
+                        class="block-popover__Bye8"
+                        data-toggle="popover"
+                        data-trigger="hover"
+                        data-placement="top"
+                        data-content="Code Editor Settings"
+                        data-container="body"
+                        aria-hidden="true"
+                        style="cursor: pointer"
+                        data-original-title=""
+                        title=""
+                        ><button
+                          class="
+                            btn btn-default
+                            setting-btn__2v2k
+                            editor-btn
+                            setting-btn
+                          "
+                        >
+                          <span class="fa fa-cog"></span></button
+                      ></span>
+                    </div>
+                    <form
+                      id="playground_form"
+                      target="_blank"
+                      method="post"
+                      action="/playground/new/empty"
+                      style="display: none"
+                    >
+                      <input
+                        id="playground_form_csrf"
+                        name="csrfmiddlewaretoken"
+                        type="hidden"
+                      /><input
+                        id="playground_form_code"
+                        name="code"
+                        type="hidden"
+                      /><input
+                        id="playground_form_question"
+                        name="question"
+                        type="hidden"
+                      /><input
+                        id="playground_form_testcase"
+                        name="testcase"
+                        type="hidden"
+                      /><input
+                        id="playground_form_lang"
+                        name="lang"
+                        type="hidden"
+                      /><input
+                        id="playground_form_from_sub_res"
+                        name="from_submission_result"
+                        type="hidden"
+                      /></form
+                  ></span>
+                </div>
+              </div>
+              <div class="ReactCodeMirror">
+                <textarea
+                  name="lc-codemirror"
+                  autocomplete="off"
+                  style="display: none"
+                >
+/**
+         * @param {number[]} sticks
+         * @return {number}
+         */
+        var connectSticks = function(sticks) {
+            
+        };</textarea
+                >
+                <div class="CodeMirror cm-s-textmate CodeMirror-wrap">
+                  <div
+                    style="
+                      overflow: hidden;
+                      position: relative;
+                      width: 3px;
+                      height: 0px;
+                      top: 5px;
+                      left: 45px;
+                    "
+                  >
+                    <textarea
+                      autocorrect="off"
+                      autocapitalize="off"
+                      spellcheck="false"
+                      tabindex="0"
+                      style="
+                        position: absolute;
+                        bottom: -1em;
+                        padding: 0px;
+                        width: 1000px;
+                        height: 1em;
+                        outline: none;
+                      "
+                    ></textarea>
+                  </div>
+                  <div
+                    class="CodeMirror-vscrollbar"
+                    tabindex="-1"
+                    cm-not-content="true"
+                  >
+                    <div style="min-width: 1px; height: 0px"></div>
+                  </div>
+                  <div
+                    class="CodeMirror-hscrollbar"
+                    tabindex="-1"
+                    cm-not-content="true"
+                  >
+                    <div
+                      style="height: 100%; min-height: 1px; width: 0px"
+                    ></div>
+                  </div>
+                  <div
+                    class="CodeMirror-scrollbar-filler"
+                    cm-not-content="true"
+                  ></div>
+                  <div
+                    class="CodeMirror-gutter-filler"
+                    cm-not-content="true"
+                  ></div>
+                  <div class="CodeMirror-scroll" tabindex="-1">
+                    <div
+                      class="CodeMirror-sizer"
+                      style="
+                        margin-left: 40px;
+                        margin-bottom: -17px;
+                        border-right-width: 13px;
+                        min-height: 127px;
+                        padding-right: 0px;
+                        padding-bottom: 0px;
+                      "
+                    >
+                      <div style="position: relative; top: 0px">
+                        <div class="CodeMirror-lines" role="presentation">
+                          <div
+                            role="presentation"
+                            style="position: relative; outline: none"
+                          >
+                            <div class="CodeMirror-measure">
+                              <pre
+                                class="CodeMirror-line-like"
+                              ><span>xxxxxxxxxx</span></pre>
+                              <div
+                                class="
+                                  CodeMirror-linenumber CodeMirror-gutter-elt
+                                "
+                              >
+                                <div>7</div>
+                              </div>
+                            </div>
+                            <div class="CodeMirror-measure"></div>
+                            <div style="position: relative; z-index: 1"></div>
+                            <div class="CodeMirror-cursors">
+                              <div
+                                class="CodeMirror-cursor"
+                                style="left: 4px; top: 0px; height: 17px"
+                              >
+                                &nbsp;
+                              </div>
+                            </div>
+                            <div
+                              class="CodeMirror-code"
+                              role="presentation"
+                              style=""
+                            >
+                              <div
+                                class="CodeMirror-activeline"
+                                style="position: relative"
+                              >
+                                <div
+                                  class="
+                                    CodeMirror-activeline-background
+                                    CodeMirror-linebackground
+                                  "
+                                ></div>
+                                <div
+                                  class="
+                                    CodeMirror-gutter-background
+                                    CodeMirror-activeline-gutter
+                                  "
+                                  style="left: -40px; width: 40px"
+                                ></div>
+                                <div
+                                  class="
+                                    CodeMirror-gutter-wrapper
+                                    CodeMirror-activeline-gutter
+                                  "
+                                  style="left: -40px"
+                                >
+                                  <div
+                                    class="
+                                      CodeMirror-linenumber
+                                      CodeMirror-gutter-elt
+                                    "
+                                    style="left: 0px; width: 21px"
+                                  >
+                                    1
+                                  </div>
+                                  <div
+                                    class="CodeMirror-gutter-elt"
+                                    style="left: 29px; width: 10px"
+                                  >
+                                    <div
+                                      class="
+                                        CodeMirror-foldgutter-open
+                                        CodeMirror-guttermarker-subtle
+                                      "
+                                    ></div>
+                                  </div>
+                                </div>
+                                <pre
+                                  class="CodeMirror-line"
+                                  role="presentation"
+                                ><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">/**</span></span></pre>
+                              </div>
+                              <div style="position: relative">
+                                <div
+                                  class="CodeMirror-gutter-wrapper"
+                                  style="left: -40px"
+                                >
+                                  <div
+                                    class="
+                                      CodeMirror-linenumber
+                                      CodeMirror-gutter-elt
+                                    "
+                                    style="left: 0px; width: 21px"
+                                  >
+                                    2
+                                  </div>
+                                </div>
+                                <pre
+                                  class="CodeMirror-line"
+                                  role="presentation"
+                                ><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"> * @param {number[]} sticks</span></span></pre>
+                              </div>
+                              <div style="position: relative">
+                                <div
+                                  class="CodeMirror-gutter-wrapper"
+                                  style="left: -40px"
+                                >
+                                  <div
+                                    class="
+                                      CodeMirror-linenumber
+                                      CodeMirror-gutter-elt
+                                    "
+                                    style="left: 0px; width: 21px"
+                                  >
+                                    3
+                                  </div>
+                                </div>
+                                <pre
+                                  class="CodeMirror-line"
+                                  role="presentation"
+                                ><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"> * @return {number}</span></span></pre>
+                              </div>
+                              <div style="position: relative">
+                                <div
+                                  class="CodeMirror-gutter-wrapper"
+                                  style="left: -40px"
+                                >
+                                  <div
+                                    class="
+                                      CodeMirror-linenumber
+                                      CodeMirror-gutter-elt
+                                    "
+                                    style="left: 0px; width: 21px"
+                                  >
+                                    4
+                                  </div>
+                                </div>
+                                <pre
+                                  class="CodeMirror-line"
+                                  role="presentation"
+                                ><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"> */</span></span></pre>
+                              </div>
+                              <div style="position: relative">
+                                <div
+                                  class="CodeMirror-gutter-wrapper"
+                                  style="left: -40px"
+                                >
+                                  <div
+                                    class="
+                                      CodeMirror-linenumber
+                                      CodeMirror-gutter-elt
+                                    "
+                                    style="left: 0px; width: 21px"
+                                  >
+                                    5
+                                  </div>
+                                  <div
+                                    class="CodeMirror-gutter-elt"
+                                    style="left: 29px; width: 10px"
+                                  >
+                                    <div
+                                      class="
+                                        CodeMirror-foldgutter-open
+                                        CodeMirror-guttermarker-subtle
+                                      "
+                                    ></div>
+                                  </div>
+                                </div>
+                                <pre
+                                  class="CodeMirror-line"
+                                  role="presentation"
+                                ><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">connectSticks</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">sticks</span>) {</span></pre>
+                              </div>
+                              <div style="position: relative">
+                                <div
+                                  class="CodeMirror-gutter-wrapper"
+                                  style="left: -40px"
+                                >
+                                  <div
+                                    class="
+                                      CodeMirror-linenumber
+                                      CodeMirror-gutter-elt
+                                    "
+                                    style="left: 0px; width: 21px"
+                                  >
+                                    6
+                                  </div>
+                                </div>
+                                <pre
+                                  class="CodeMirror-line"
+                                  role="presentation"
+                                ><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;</span></pre>
+                              </div>
+                              <div style="position: relative">
+                                <div
+                                  class="CodeMirror-gutter-wrapper"
+                                  style="left: -40px"
+                                >
+                                  <div
+                                    class="
+                                      CodeMirror-linenumber
+                                      CodeMirror-gutter-elt
+                                    "
+                                    style="left: 0px; width: 21px"
+                                  >
+                                    7
+                                  </div>
+                                </div>
+                                <pre
+                                  class="CodeMirror-line"
+                                  role="presentation"
+                                ><span role="presentation" style="padding-right: 0.1px;">};</span></pre>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        height: 13px;
+                        width: 1px;
+                        border-bottom: 0px solid transparent;
+                        top: 127px;
+                      "
+                    ></div>
+                    <div
+                      class="CodeMirror-gutters"
+                      style="height: 140px; left: 0px"
+                    >
+                      <div
+                        class="CodeMirror-gutter CodeMirror-linenumbers"
+                        style="width: 29px"
+                      ></div>
+                      <div
+                        class="CodeMirror-gutter CodeMirror-foldgutter"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="action">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="testcase-area">
+                      <div class="">
+                        <div class="custom-textcase">
+                          <label for="custom_testcase"
+                            ><input
+                              type="checkbox"
+                              id="custom_testcase"
+                              name="custom_testcase"
+                            /><span>&nbsp; Custom Testcase</span></label
+                          >
+                          <div class="contribute-btn">
+                            <span
+                              >(&nbsp;<a
+                                style="font-weight: bold; cursor: pointer"
+                                >Contribute&nbsp;<span
+                                  class="fa fa-exclamation-circle"
+                                  data-toggle="tooltip"
+                                  data-placement="top"
+                                  data-original-title="Contribute missing testcases and get rewarded!"
+                                  aria-hidden="true"
+                                  style="cursor: pointer"
+                                ></span></a
+                              >&nbsp;)</span
+                            >
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="ds-viewer-container col-lg-12">
+                            <div id="ds-viewer"></div>
+                            <div class="hidden testcase-input-base">
+                              <textarea
+                                class="form-control testCaseInputArea"
+                                rows="5"
+                                id="textArea"
+                              >
+[2,4,3]</textarea
+                              >
+                              <div class="row">
+                                <div class="col-lg-12 testcase-help-label">
+                                  <div class="dropdown dropdown-inline">
+                                    <a
+                                      id="dLabel"
+                                      class="menu-links"
+                                      data-toggle="dropdown"
+                                      role="button"
+                                      aria-haspopup="true"
+                                      aria-expanded="false"
+                                      ><i
+                                        class="fa fa-question-circle"
+                                        aria-hidden="true"
+                                      ></i
+                                      >&nbsp;How to create a testcase<span
+                                        class="caret"
+                                      ></span
+                                    ></a>
+                                    <ul
+                                      class="dropdown-menu pull-right"
+                                      aria-labelledby="dLabel"
+                                    >
+                                      <li>
+                                        <a
+                                          href="https://support.leetcode.com/hc/en-us/articles/360011883654-What-does-1-null-2-3-mean-in-binary-tree-representation-"
+                                          >Binary tree</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="pull-right">
+                      <span class="hidden-xs"
+                        ><div class="keyboard-shortcuts__sEqa">
+                          <span
+                            ><span
+                              class=""
+                              data-toggle="popover"
+                              data-trigger="hover"
+                              data-placement="top"
+                              data-content="Show code editor shortcuts."
+                              data-container=""
+                              aria-hidden="true"
+                              style="cursor: pointer"
+                              data-original-title=""
+                              title=""
+                              ><div class="btn round">
+                                <i
+                                  class="fa fa-question-circle"
+                                ></i></div></span
+                          ></span></div></span
+                      ><span
+                        class=""
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        data-original-title="Shortcut: Ctrl + '"
+                        aria-hidden="true"
+                        style="cursor: pointer"
+                        ><button
+                          class="btn btn-default btn-round"
+                          type="button"
+                          style="margin-right: 10px"
+                        >
+                          <span
+                            ><i class="fa fa-play-circle" aria-hidden="true"></i
+                            >&nbsp;<span
+                              >Run<span class="hidden-xs"> Code</span></span
+                            ></span
+                          >
+                        </button></span
+                      ><button class="btn btn-primary btn-round" type="button">
+                        <span
+                          ><i class="fa fa-cloud-upload" aria-hidden="true"></i
+                          >&nbsp;Submit</span
+                        >
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div id="submit_error" class="text-danger hidden">
+                    Submit failed, try again please.
+                  </div>
+                  <div id="submit_warning" class="text-danger"></div>
+                </div>
+                <div class="submission-result-base">
+                  <div class="row animated hidden">
+                    <hr class="line" />
+                    <div class="col-lg-12 run-code-status">
+                      <h4>
+                        <span
+                          ><span
+                            >Run Code<span class="hidden-xs"> Status</span
+                            >:&nbsp;</span
+                          ></span
+                        ><span class=""
+                          ><span id="result_state" class="text-info"></span
+                          ><span id="submit_wait" class="loading-center hidden"
+                            ><img
+                              src="/static/images/loading.gif"
+                              class="img-rounded loading-image"
+                              alt="loading"
+                              width="15" /></span
+                        ></span>
+                      </h4>
+                    </div>
+                    <div class="col-lg-12"><div class="text-danger"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
