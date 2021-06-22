@@ -16,19 +16,23 @@ function makeVoters(n, candidates) {
 }
 console.time("rank choice");
 
-function rankChoice(voters) {
+function rankChoice(voters, candidates) {
+  let elimination = true;
   let results = {};
   let majority = voters.length / 2;
   let winners = [],
     losers = [];
 
+  console.log(candidates);
+  if (candidates.length <= 2) elimination = false;
+  // debugger;
   //     get everybody's first choice
   voters.forEach((voter, index) => {
-    if (voter.root && voter.root.val) {
+    // make sure top choice is a valid candidate, and cascade through choices if not
+    validate(voter, voters, candidates, index);
+
+    if (voter.root) {
       results[voter.root.val] = results[voter.root.val] + 1 || 1;
-    } else {
-      // if voter is out of votes, remove them from array
-      voters.splice(index, 1);
     }
   });
 
@@ -54,7 +58,34 @@ function rankChoice(voters) {
     if (voter.root && losers.includes(voter.root.val)) voter.shift();
   });
 
-  return rankChoice(voters);
+  // remove losers from candidacy
+  if (elimination) {
+    losers.forEach(loser => {
+      candidates.splice(candidates.indexOf(loser), 1);
+    });
+  }
+
+  return rankChoice(voters, candidates);
+
+  function validate(voter, voters, candidates, index) {
+    if (!voter.root) {
+      // if voter has exhausted all votes, remove voter
+      return voters.splice(index, 1);
+    }
+    if (!candidates.includes(voter.root.val)) {
+      let current = voter.root;
+      while (current) {
+        if (!candidates.includes(current.val)) {
+          current = current.next;
+        } else {
+          voter.root = current;
+          break;
+        }
+      }
+    } else {
+      return;
+    }
+  }
 }
 
 class Node {
@@ -99,7 +130,5 @@ let candidates = [
   "Andrew Yang",
 ];
 
-let voters = makeVoters(80000, candidates);
-console.log(rankChoice(voters));
-
-// makeVoters(100, candidates)
+let voters = makeVoters(300, candidates);
+console.log(rankChoice(voters, candidates));
